@@ -1,0 +1,15 @@
+const express=require('express')
+const router=express.Router()
+const {addPost,getUserPosts,deleteUserPost,getAllPosts,addLikeToPost,deletePostLike,getPostLike,getPost,getAllowedPostToUser}=require('../services/postService')
+const {protect,allowedTo}=require('../services/authService')
+
+router.route('/').post(protect,allowedTo('user'),addPost)
+router.route('/allPosts').get(getAllPosts)
+router.route('/:postId').delete(deleteUserPost).get(getPostLike)
+router.route('/thePost/:postId').get(getPost)
+router.route("/addLike/:postId").put(addLikeToPost)
+router.route("/deleteLike/:postId").put(deletePostLike)
+router.route('/userPosts/:userId').get(getUserPosts)
+router.route('/userPosts/:userId').get(getUserPosts)
+router.route('/getAllowedPostToUser/:userId').get(getAllowedPostToUser)
+module.exports=router
